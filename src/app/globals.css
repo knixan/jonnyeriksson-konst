@@ -8,8 +8,13 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-heading);
+  --color-cta: var(--cta);
+  --color-cta-hover: var(--cta-hover);
+  --color-cta-foreground: var(--cta-foreground);
+  --color-cta-hover-foreground: var(--cta-hover-foreground);
+  --color-footer: var(--footer);
+  --color-footer-foreground: var(--footer-foreground);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -49,24 +54,30 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --background: oklch(96.23% 0.0102 81.8); /* #F6F2EB varm linne */
+  --foreground: oklch(24.5% 0.0048 67.6); /* #22201E kolsvart */
+  --card: oklch(100% 0 0); /* #FFFFFF */
+  --card-foreground: oklch(24.5% 0.0048 67.6); /* #22201E */
+  --popover: oklch(100% 0 0); /* #FFFFFF */
+  --popover-foreground: oklch(24.5% 0.0048 67.6); /* #22201E */
+  --primary: oklch(45.16% 0.0579 54.78); /* #6F4D36 bränd umbra */
+  --primary-foreground: oklch(97.66% 0.0057 84.57); /* #F9F7F3 elfenben */
+  --secondary: oklch(93.12% 0.0171 76.11); /* #EFE7DC ljus sand */
+  --secondary-foreground: oklch(24.5% 0.0048 67.6); /* #22201E */
+  --muted: oklch(93.12% 0.0171 76.11); /* #EFE7DC ljus sand */
+  --muted-foreground: oklch(45.69% 0.0124 67.51); /* #5C5650 varm grå */
+  --accent: oklch(66.47% 0.0989 73.74); /* #B88A4A ockra */
+  --accent-foreground: oklch(24.5% 0.0048 67.6); /* #22201E */
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --border: oklch(85.53% 0.0192 75.3); /* #D7CEC2 ljus sten */
+  --input: oklch(85.53% 0.0192 75.3); /* #D7CEC2 ljus sten */
+  --ring: oklch(66.47% 0.0989 73.74); /* #B88A4A ockra */
+  --cta: oklch(25.65% 0.004 84.58); /* #242321 nästan svart */
+  --cta-hover: oklch(66.47% 0.0989 73.74); /* #B88A4A ockra */
+  --cta-foreground: oklch(97.66% 0.0057 84.57); /* #F9F7F3 elfenben */
+  --cta-hover-foreground: oklch(100% 0 0); /* #FFFFFF */
+  --footer: oklch(24.5% 0.0048 67.6); /* #22201E kolsvart */
+  --footer-foreground: oklch(97.66% 0.0057 84.57); /* #F9F7F3 elfenben */
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -84,24 +95,31 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  /* Storefront uses a fixed warm palette (no dark mode designed yet) — mirror :root so nothing breaks if next-themes is ever toggled. */
+  --background: oklch(96.23% 0.0102 81.8);
+  --foreground: oklch(24.5% 0.0048 67.6);
+  --card: oklch(100% 0 0);
+  --card-foreground: oklch(24.5% 0.0048 67.6);
+  --popover: oklch(100% 0 0);
+  --popover-foreground: oklch(24.5% 0.0048 67.6);
+  --primary: oklch(45.16% 0.0579 54.78);
+  --primary-foreground: oklch(97.66% 0.0057 84.57);
+  --secondary: oklch(93.12% 0.0171 76.11);
+  --secondary-foreground: oklch(24.5% 0.0048 67.6);
+  --muted: oklch(93.12% 0.0171 76.11);
+  --muted-foreground: oklch(45.69% 0.0124 67.51);
+  --accent: oklch(66.47% 0.0989 73.74);
+  --accent-foreground: oklch(24.5% 0.0048 67.6);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --border: oklch(85.53% 0.0192 75.3);
+  --input: oklch(85.53% 0.0192 75.3);
+  --ring: oklch(66.47% 0.0989 73.74);
+  --cta: oklch(25.65% 0.004 84.58);
+  --cta-hover: oklch(66.47% 0.0989 73.74);
+  --cta-foreground: oklch(97.66% 0.0057 84.57);
+  --cta-hover-foreground: oklch(100% 0 0);
+  --footer: oklch(24.5% 0.0048 67.6);
+  --footer-foreground: oklch(97.66% 0.0057 84.57);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -126,5 +144,13 @@
   }
   html {
     @apply font-sans;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading;
   }
 }
