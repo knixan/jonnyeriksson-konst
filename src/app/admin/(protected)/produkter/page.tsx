@@ -81,7 +81,10 @@ export default async function AdminProductsPage() {
                   >
                     Redigera
                   </Button>
-                  <DeleteProductButton productId={product.id} productName={product.name} />
+                  <DeleteProductButton
+                    productId={product.id}
+                    productName={product.name}
+                  />
                 </TableCell>
               </TableRow>
             );

@@ -16,7 +16,7 @@ export const siteSettings = defineType({
           name: "eyebrow",
           title: "Kort text ovanför rubriken",
           type: "string",
-          description: "T.ex. \"Platser. Föremål. Fantasi.\"",
+          description: 'T.ex. "Platser. Föremål. Fantasi."',
         }),
         defineField({ name: "heading", title: "Rubrik", type: "string" }),
         defineField({ name: "subheading", title: "Underrubrik", type: "text" }),

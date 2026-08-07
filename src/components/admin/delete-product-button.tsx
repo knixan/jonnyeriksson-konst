@@ -24,7 +24,8 @@ export function DeleteProductButton({
       size="sm"
       disabled={deleting}
       onClick={async () => {
-        if (!confirm(`Ta bort "${productName}"? Detta går inte att ångra.`)) return;
+        if (!confirm(`Ta bort "${productName}"? Detta går inte att ångra.`))
+          return;
         setDeleting(true);
         try {
           await deleteProduct(productId);
