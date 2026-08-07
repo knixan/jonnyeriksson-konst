@@ -54,8 +54,7 @@ model Product {
   description String
   type        ProductType      @default(PRINT)
   status      ProductStatus    @default(DRAFT)
-  categoryId  String?
-  category    Category?        @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  categories  Category[]
   images      ProductImage[]
   variants    ProductVariant[]
   createdAt   DateTime         @default(now())

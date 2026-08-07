@@ -1,6 +1,5 @@
-import { MapPin, Phone } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
-import { FaInstagram } from "react-icons/fa6";
 
 import { SITE_SETTINGS_QUERY, type SiteSettings } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -12,7 +11,7 @@ export async function Footer() {
   const footerText = settings?.footer?.text;
 
   return (
-    <footer className="bg-footer text-footer-foreground">
+    <footer id="kontakt" className="bg-footer text-footer-foreground">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-12 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <p className="text-xl font-medium">Jonny Eriksson</p>
@@ -28,13 +27,27 @@ export async function Footer() {
               href={`tel:${contact.phone}`}
               className="flex items-center gap-2 hover:text-accent"
             >
-              <Phone className="size-4" />
+              <Image src="/icon/icon-phone.png" alt="" width={16} height={16} />
               {contact.phone}
+            </a>
+          ) : null}
+          {contact?.email ? (
+            <a
+              href={`mailto:${contact.email}`}
+              className="flex items-center gap-2 hover:text-accent"
+            >
+              <Image src="/icon/icon-email.png" alt="" width={16} height={16} />
+              {contact.email}
             </a>
           ) : null}
           {contact?.location ? (
             <span className="flex items-center gap-2">
-              <MapPin className="size-4" />
+              <Image
+                src="/icon/icon-map-nail.png"
+                alt=""
+                width={16}
+                height={16}
+              />
               {contact.location}
             </span>
           ) : null}
@@ -45,8 +58,24 @@ export async function Footer() {
               rel="noopener noreferrer"
               className="flex items-center gap-2 hover:text-accent"
             >
-              <FaInstagram className="size-4" />
+              <Image src="/icon/icon-insta.png" alt="" width={16} height={16} />
               Instagram
+            </Link>
+          ) : null}
+          {contact?.facebookUrl ? (
+            <Link
+              href={contact.facebookUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 hover:text-accent"
+            >
+              <Image
+                src="/icon/icon-facebook.png"
+                alt=""
+                width={16}
+                height={16}
+              />
+              Facebook
             </Link>
           ) : null}
           {contact?.konstSeUrl ? (

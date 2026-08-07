@@ -11,33 +11,36 @@ export async function Hero() {
   const settings = data as SiteSettings | null;
   const hero = settings?.hero;
   const imageUrl = hero?.image
-    ? urlFor(hero.image).width(1600).height(1000).url()
+    ? urlFor(hero.image).width(1920).height(1200).url()
     : "/hero.png";
 
   return (
-    <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-background">
-      <Image
-        src={imageUrl}
-        alt=""
-        fill
-        priority
-        className="object-cover opacity-90"
-      />
-      <div className="absolute inset-0 bg-background/40" />
-      <div className="relative flex flex-col items-center gap-6 px-6 text-center">
-        <h1 className="max-w-2xl text-5xl text-foreground sm:text-6xl">
-          {hero?.heading || "Jonny Eriksson"}
+    <section className="relative overflow-hidden bg-background">
+      <div className="absolute inset-0">
+        <Image src={imageUrl} alt="" fill priority className="object-cover" />
+        <div className="absolute inset-0 bg-linear-to-r from-background via-background/75 to-background/10" />
+      </div>
+      <div className="relative mx-auto flex min-h-[75vh] max-w-6xl flex-col justify-center px-6 py-24">
+        <p className="text-xs tracking-[0.2em] text-accent uppercase">
+          {hero?.eyebrow || "Platser · Föremål · Fantasi"}
+        </p>
+        <h1 className="mt-4 max-w-xl text-5xl text-foreground sm:text-6xl">
+          {hero?.heading || "Känslan framför det exakta"}
         </h1>
-        <p className="max-w-md text-lg text-muted-foreground">
-          {hero?.subheading || "Originalkonstverk och prints från Hallsberg."}
+        <p className="mt-6 max-w-md text-muted-foreground">
+          {hero?.subheading ||
+            "Jag inspireras av platser, föremål och fantasi. När jag målar försöker jag fånga känslan och stämningen i mitt motiv, snarare än att återge det exakt som det ser ut."}
         </p>
         <Button
           render={<Link href="/produkter" />}
           nativeButton={false}
-          variant="cta"
-          size="lg"
+          variant="brush"
+          className="mt-8 h-auto w-fit gap-2 px-9 py-5 text-sm uppercase tracking-wide"
         >
-          Se konstverk
+          <span>Upptäck konstverken</span>
+          <span aria-hidden className="text-xl font-light">
+            →
+          </span>
         </Button>
       </div>
     </section>

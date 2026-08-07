@@ -1,6 +1,6 @@
 "use client";
 
-import { ShoppingBag } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 import { useCart } from "@/components/cart/cart-context";
@@ -14,7 +14,7 @@ export function CartButton() {
       aria-label="Kundvagn"
       className="relative text-muted-foreground hover:text-accent"
     >
-      <ShoppingBag className="size-5" />
+      <Image src="/icon/icon-bag.png" alt="" width={22} height={22} />
       {itemCount > 0 ? (
         <span className="absolute -top-2 -right-2 flex size-4 items-center justify-center rounded-full bg-cta text-[10px] text-cta-foreground">
           {itemCount}

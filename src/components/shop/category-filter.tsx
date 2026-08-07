@@ -8,14 +8,18 @@ type Category = Awaited<ReturnType<typeof getCategories>>[number];
 export function CategoryFilter({
   categories,
   activeSlug,
+  activeType,
 }: {
   categories: Category[];
   activeSlug?: string;
+  activeType?: "ORIGINAL" | "PRINT";
 }) {
+  const typeQuery = activeType ? `typ=${activeType}` : "";
+
   return (
     <div className="flex flex-wrap gap-2">
       <Link
-        href="/produkter"
+        href={`/produkter${typeQuery ? `?${typeQuery}` : ""}`}
         className={cn(
           "rounded-full border border-border px-4 py-1.5 text-sm hover:border-accent hover:text-accent",
           !activeSlug
@@ -28,7 +32,7 @@ export function CategoryFilter({
       {categories.map((category) => (
         <Link
           key={category.id}
-          href={`/produkter?kategori=${category.slug}`}
+          href={`/produkter?kategori=${category.slug}${typeQuery ? `&${typeQuery}` : ""}`}
           className={cn(
             "rounded-full border border-border px-4 py-1.5 text-sm hover:border-accent hover:text-accent",
             activeSlug === category.slug

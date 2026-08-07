@@ -18,9 +18,9 @@ export default async function ProductPage(
     <div className="mx-auto grid max-w-6xl gap-10 px-6 py-16 sm:grid-cols-2">
       <ProductGallery images={product.images} alt={product.name} />
       <div>
-        {product.category ? (
+        {product.categories.length > 0 ? (
           <p className="text-sm text-muted-foreground">
-            {product.category.name}
+            {product.categories.map((category) => category.name).join(", ")}
           </p>
         ) : null}
         <h1 className="mt-1 text-4xl text-foreground">{product.name}</h1>

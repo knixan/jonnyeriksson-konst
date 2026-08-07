@@ -33,7 +33,7 @@ async function main() {
         "Ett stämningsfullt vinterlandskap i varma jordtoner, målat i olja på duk.",
       type: "ORIGINAL",
       status: "ACTIVE",
-      categoryId: original.id,
+      categories: { connect: { id: original.id } },
       variants: {
         create: [
           { size: "Original, 60x80 cm", framed: false, priceOre: 850000 },
@@ -51,7 +51,7 @@ async function main() {
       description: "Print av ett ljust sommarmotiv i akvarell.",
       type: "PRINT",
       status: "ACTIVE",
-      categoryId: malningar.id,
+      categories: { connect: { id: malningar.id } },
       variants: {
         create: [
           { size: "A4", framed: false, priceOre: 39900, sortOrder: 0 },
@@ -75,7 +75,7 @@ async function main() {
         "Grafiskt tryck i begränsad upplaga, inspirerat av Närkes skogar.",
       type: "PRINT",
       status: "ACTIVE",
-      categoryId: grafik.id,
+      categories: { connect: { id: grafik.id } },
       variants: {
         create: [
           { size: "A4", framed: false, priceOre: 44900, sortOrder: 0 },

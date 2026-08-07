@@ -8,6 +8,7 @@ export const SITE_SETTINGS_QUERY = defineQuery(
 
 export type SiteSettings = {
   hero?: {
+    eyebrow?: string;
     heading?: string;
     subheading?: string;
     image?: SanityImageSource;
@@ -19,6 +20,8 @@ export type SiteSettings = {
   };
   contact?: {
     phone?: string;
+    email?: string;
+    facebookUrl?: string;
     swishPhone?: string;
     instagramUrl?: string;
     konstSeUrl?: string;

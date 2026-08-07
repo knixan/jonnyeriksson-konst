@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { AboutSection } from "@/components/home/about-section";
+import { FeatureStrip } from "@/components/home/feature-strip";
 import { Hero } from "@/components/home/hero";
 import { ProductGrid } from "@/components/shop/product-grid";
 import { getLatestProducts } from "@/lib/products";
@@ -11,6 +12,7 @@ export default async function Home() {
   return (
     <>
       <Hero />
+      <FeatureStrip />
       <section className="bg-card">
         <div className="mx-auto max-w-6xl px-6 py-20">
           <div className="mb-10 flex items-end justify-between">

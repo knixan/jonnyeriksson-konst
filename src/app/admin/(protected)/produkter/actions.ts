@@ -12,6 +12,21 @@ async function requireSession() {
   if (!session) throw new Error("Unauthorized");
 }
 
+function normalizeVariants(values: ProductFormValues) {
+  if (values.type === "ORIGINAL") {
+    const first = values.variants[0];
+    return [
+      {
+        size: "Original",
+        framed: false,
+        priceKr: first?.priceKr ?? 0,
+        inStock: first?.inStock ?? true,
+      },
+    ];
+  }
+  return values.variants;
+}
+
 export async function createProduct(values: ProductFormValues) {
   await requireSession();
 
@@ -27,7 +42,7 @@ export async function createProduct(values: ProductFormValues) {
         description: values.description,
         type: values.type,
         status: values.status,
-        categoryId: values.categoryId || null,
+        categories: { connect: values.categoryIds.map((id) => ({ id })) },
         images: {
           create: values.images.map((image, position) => ({
             url: image.url,
@@ -36,7 +51,7 @@ export async function createProduct(values: ProductFormValues) {
           })),
         },
         variants: {
-          create: values.variants.map((variant, sortOrder) => ({
+          create: normalizeVariants(values).map((variant, sortOrder) => ({
             size: variant.size,
             framed: variant.framed,
             priceOre: Math.round(variant.priceKr * 100),
@@ -76,7 +91,7 @@ export async function updateProduct(
           description: values.description,
           type: values.type,
           status: values.status,
-          categoryId: values.categoryId || null,
+          categories: { set: values.categoryIds.map((id) => ({ id })) },
         },
       }),
       prisma.productImage.deleteMany({ where: { productId } }),
@@ -90,7 +105,7 @@ export async function updateProduct(
       }),
       prisma.productVariant.deleteMany({ where: { productId } }),
       prisma.productVariant.createMany({
-        data: values.variants.map((variant, sortOrder) => ({
+        data: normalizeVariants(values).map((variant, sortOrder) => ({
           productId,
           size: variant.size,
           framed: variant.framed,
@@ -119,4 +134,12 @@ export async function setProductStatus(
   await prisma.product.update({ where: { id: productId }, data: { status } });
   revalidatePath("/admin/produkter");
   revalidatePath("/produkter");
+}
+
+export async function deleteProduct(productId: string) {
+  await requireSession();
+  const product = await prisma.product.delete({ where: { id: productId } });
+  revalidatePath("/admin/produkter");
+  revalidatePath("/produkter");
+  revalidatePath(`/produkter/${product.slug}`);
 }

@@ -19,6 +19,8 @@ const buttonVariants = cva(
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
         cta: "bg-cta text-cta-foreground hover:bg-cta-hover hover:text-cta-hover-foreground",
+        brush:
+          "group relative isolate overflow-visible border-0 bg-transparent text-cta-foreground transition-transform duration-200 hover:translate-x-0.5 hover:bg-transparent hover:text-cta-hover-foreground",
       },
       size: {
         default:
@@ -45,6 +47,7 @@ function Button({
   className,
   variant = "default",
   size = "default",
+  children,
   ...props
 }: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
   return (
@@ -52,7 +55,30 @@ function Button({
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
-    />
+    >
+      {variant === "brush" ? <BrushStroke /> : null}
+      {children}
+    </ButtonPrimitive>
+  );
+}
+
+// Organic, hand-painted-looking backdrop for variant="brush" — an SVG path
+// (not clip-path) so the edges can curve instead of being straight polygon
+// segments. Colors come from the --cta/--cta-hover tokens via Tailwind's
+// generated fill-* utilities, never hardcoded hex.
+function BrushStroke() {
+  return (
+    <svg
+      className="pointer-events-none absolute inset-0 -z-10 size-full"
+      viewBox="0 0 320 72"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M10,20 C5,9 22,3 42,6 C92,1 150,8 202,4 C244,1 282,7 306,15 C314,24 309,35 311,44 C315,55 305,63 294,65 C248,71 198,64 148,69 C98,73 48,66 13,59 C3,51 8,39 4,31 C2,25 6,21 10,20 Z"
+        className="fill-cta transition-colors duration-200 group-hover:fill-cta-hover"
+      />
+    </svg>
   );
 }
 

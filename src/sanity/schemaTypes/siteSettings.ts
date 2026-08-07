@@ -12,6 +12,12 @@ export const siteSettings = defineType({
       title: "Hero",
       type: "object",
       fields: [
+        defineField({
+          name: "eyebrow",
+          title: "Kort text ovanför rubriken",
+          type: "string",
+          description: "T.ex. \"Platser. Föremål. Fantasi.\"",
+        }),
         defineField({ name: "heading", title: "Rubrik", type: "string" }),
         defineField({ name: "subheading", title: "Underrubrik", type: "text" }),
         defineField({
@@ -48,6 +54,12 @@ export const siteSettings = defineType({
       type: "object",
       fields: [
         defineField({ name: "phone", title: "Telefonnummer", type: "string" }),
+        defineField({ name: "email", title: "E-post", type: "string" }),
+        defineField({
+          name: "facebookUrl",
+          title: "Facebook-länk",
+          type: "url",
+        }),
         defineField({
           name: "swishPhone",
           title: "Swish-nummer",

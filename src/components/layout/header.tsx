@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { CartButton } from "@/components/cart/cart-button";
@@ -10,11 +11,24 @@ export function Header() {
           Jonny Eriksson
         </Link>
         <nav className="flex items-center gap-6 text-sm text-primary">
-          <Link href="/produkter" className="hover:text-accent">
-            Konstverk
+          <Link href="/produkter?typ=ORIGINAL" className="hover:text-accent">
+            Original målningar
+          </Link>
+          <Link href="/produkter?typ=PRINT" className="hover:text-accent">
+            Prints
           </Link>
           <Link href="/#om-konstnaren" className="hover:text-accent">
             Om konstnären
+          </Link>
+          <Link href="/#kontakt" className="hover:text-accent">
+            Kontakt
+          </Link>
+          <Link
+            href="/produkter"
+            aria-label="Sök"
+            className="text-muted-foreground hover:text-accent"
+          >
+            <Image src="/icon/icon-search.png" alt="" width={20} height={20} />
           </Link>
           <CartButton />
         </nav>

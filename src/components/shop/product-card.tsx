@@ -16,13 +16,13 @@ export function ProductCard({ product }: { product: Product }) {
       href={`/produkter/${product.slug}`}
       className="group flex flex-col gap-3"
     >
-      <div className="relative aspect-4/5 overflow-hidden rounded-lg bg-card">
+      <div className="relative aspect-square overflow-hidden rounded-lg bg-card">
         {image ? (
           <Image
             src={image.url}
             alt={image.alt ?? product.name}
             fill
-            className="object-cover transition-transform group-hover:scale-105"
+            className="object-contain transition-transform group-hover:scale-105"
           />
         ) : (
           <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
@@ -32,14 +32,16 @@ export function ProductCard({ product }: { product: Product }) {
       </div>
       <div>
         <h3 className="text-lg text-foreground">{product.name}</h3>
-        {product.category ? (
+        {product.categories.length > 0 ? (
           <p className="text-sm text-muted-foreground">
-            {product.category.name}
+            {product.categories.map((category) => category.name).join(", ")}
           </p>
         ) : null}
         {fromPrice !== null ? (
           <p className="mt-1 text-sm text-primary">
-            Från {formatPrice(fromPrice)}
+            {product.variants.length > 1
+              ? `Från ${formatPrice(fromPrice)}`
+              : formatPrice(fromPrice)}
           </p>
         ) : null}
       </div>

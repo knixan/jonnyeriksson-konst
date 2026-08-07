@@ -20,9 +20,9 @@ export default async function NewProductPage() {
           description: "",
           type: "PRINT",
           status: "DRAFT",
-          categoryId: "",
+          categoryIds: [],
           images: [],
-          variants: [],
+          variants: [{ size: "", framed: false, priceKr: 0, inStock: true }],
         }}
         onSubmit={createProduct}
       />

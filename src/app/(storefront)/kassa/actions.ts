@@ -87,22 +87,43 @@ export async function createOrder(
 
   const orderNumber = generateOrderNumber();
 
-  const order = await prisma.order.create({
-    data: {
-      orderNumber,
-      customerName: data.name,
-      customerEmail: data.email,
-      customerPhone: data.phone,
-      addressLine1: data.addressLine1,
-      addressLine2: data.addressLine2 || null,
-      postalCode: data.postalCode,
-      city: data.city,
-      subtotalOre,
-      shippingOre,
-      totalOre,
-      paymentMethod: data.paymentMethod,
-      items: { create: items },
-    },
+  // Originalmålningar finns bara i ett exemplar — markera dem som slutsålda
+  // direkt när ordern läggs, oavsett betalningsmetod, så de inte kan köpas igen.
+  const originalVariantIds = items
+    .filter(
+      (item) =>
+        variants.find((v) => v.id === item.variantId)?.product.type ===
+        "ORIGINAL",
+    )
+    .map((item) => item.variantId);
+
+  const order = await prisma.$transaction(async (tx) => {
+    const createdOrder = await tx.order.create({
+      data: {
+        orderNumber,
+        customerName: data.name,
+        customerEmail: data.email,
+        customerPhone: data.phone,
+        addressLine1: data.addressLine1,
+        addressLine2: data.addressLine2 || null,
+        postalCode: data.postalCode,
+        city: data.city,
+        subtotalOre,
+        shippingOre,
+        totalOre,
+        paymentMethod: data.paymentMethod,
+        items: { create: items },
+      },
+    });
+
+    if (originalVariantIds.length > 0) {
+      await tx.productVariant.updateMany({
+        where: { id: { in: originalVariantIds } },
+        data: { inStock: false },
+      });
+    }
+
+    return createdOrder;
   });
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";

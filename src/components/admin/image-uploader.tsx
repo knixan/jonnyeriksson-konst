@@ -1,8 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import { toast } from "sonner";
 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { UploadDropzone } from "@/lib/uploadthing";
 
 export type UploadedImage = { url: string; alt?: string };
@@ -14,6 +17,21 @@ export function ImageUploader({
   images: UploadedImage[];
   onChange: (images: UploadedImage[]) => void;
 }) {
+  const [urlInput, setUrlInput] = useState("");
+
+  const addUrl = () => {
+    const url = urlInput.trim();
+    if (!url) return;
+    try {
+      new URL(url);
+    } catch {
+      toast.error("Ogiltig bildlänk.");
+      return;
+    }
+    onChange([...images, { url }]);
+    setUrlInput("");
+  };
+
   return (
     <div className="flex flex-col gap-3">
       {images.length > 0 ? (
@@ -41,6 +59,7 @@ export function ImageUploader({
           ))}
         </div>
       ) : null}
+
       <UploadDropzone
         endpoint="productImage"
         onClientUploadComplete={(res) => {
@@ -51,6 +70,30 @@ export function ImageUploader({
           toast.error(`Uppladdning misslyckades: ${error.message}`);
         }}
       />
+
+      <div className="flex items-center gap-3 text-xs text-muted-foreground">
+        <div className="h-px flex-1 bg-border" />
+        eller klistra in en bildlänk
+        <div className="h-px flex-1 bg-border" />
+      </div>
+
+      <div className="flex gap-2">
+        <Input
+          type="url"
+          placeholder="https://…"
+          value={urlInput}
+          onChange={(event) => setUrlInput(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              event.preventDefault();
+              addUrl();
+            }
+          }}
+        />
+        <Button type="button" variant="outline" onClick={addUrl}>
+          Lägg till länk
+        </Button>
+      </div>
     </div>
   );
 }

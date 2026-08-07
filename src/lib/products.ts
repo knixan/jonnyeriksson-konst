@@ -1,16 +1,18 @@
 import { prisma } from "@/lib/prisma";
+import type { ProductType } from "@/generated/prisma/client";
 
 const productInclude = {
-  category: true,
+  categories: true,
   images: { orderBy: { position: "asc" as const } },
   variants: { orderBy: { sortOrder: "asc" as const } },
 };
 
-export function getActiveProducts(categorySlug?: string) {
+export function getActiveProducts(categorySlug?: string, type?: ProductType) {
   return prisma.product.findMany({
     where: {
       status: "ACTIVE",
-      category: categorySlug ? { slug: categorySlug } : undefined,
+      type,
+      categories: categorySlug ? { some: { slug: categorySlug } } : undefined,
     },
     include: productInclude,
     orderBy: { createdAt: "desc" },

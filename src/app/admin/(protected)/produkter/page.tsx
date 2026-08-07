@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { DeleteProductButton } from "@/components/admin/delete-product-button";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,7 +16,7 @@ import { prisma } from "@/lib/prisma";
 
 export default async function AdminProductsPage() {
   const products = await prisma.product.findMany({
-    include: { category: true, variants: true },
+    include: { categories: true, variants: true },
     orderBy: { createdAt: "desc" },
   });
 
@@ -36,9 +37,10 @@ export default async function AdminProductsPage() {
         <TableHeader>
           <TableRow>
             <TableHead>Namn</TableHead>
-            <TableHead>Kategori</TableHead>
+            <TableHead>Kategorier</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Från pris</TableHead>
+            <TableHead className="text-right">Åtgärder</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -55,7 +57,9 @@ export default async function AdminProductsPage() {
                     {product.name}
                   </Link>
                 </TableCell>
-                <TableCell>{product.category?.name ?? "—"}</TableCell>
+                <TableCell>
+                  {product.categories.map((c) => c.name).join(", ") || "—"}
+                </TableCell>
                 <TableCell>
                   <Badge
                     variant={
@@ -67,6 +71,17 @@ export default async function AdminProductsPage() {
                 </TableCell>
                 <TableCell>
                   {fromPrice !== null ? formatPrice(fromPrice) : "—"}
+                </TableCell>
+                <TableCell className="flex justify-end gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    nativeButton={false}
+                    render={<Link href={`/admin/produkter/${product.id}`} />}
+                  >
+                    Redigera
+                  </Button>
+                  <DeleteProductButton productId={product.id} productName={product.name} />
                 </TableCell>
               </TableRow>
             );

@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 
+import { DeleteProductButton } from "@/components/admin/delete-product-button";
 import { ProductForm } from "@/components/admin/product-form";
 import { prisma } from "@/lib/prisma";
 
@@ -14,6 +15,7 @@ export default async function EditProductPage(
     prisma.product.findUnique({
       where: { id },
       include: {
+        categories: true,
         images: { orderBy: { position: "asc" } },
         variants: { orderBy: { sortOrder: "asc" } },
       },
@@ -27,7 +29,10 @@ export default async function EditProductPage(
 
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-3xl text-foreground">Redigera produkt</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl text-foreground">Redigera produkt</h1>
+        <DeleteProductButton productId={product.id} productName={product.name} />
+      </div>
       <ProductForm
         categories={categories}
         submitLabel="Spara ändringar"
@@ -37,7 +42,7 @@ export default async function EditProductPage(
           description: product.description,
           type: product.type,
           status: product.status,
-          categoryId: product.categoryId ?? "",
+          categoryIds: product.categories.map((c) => c.id),
           images: product.images.map((image) => ({
             url: image.url,
             alt: image.alt ?? undefined,
@@ -50,7 +55,7 @@ export default async function EditProductPage(
             inStock: variant.inStock,
           })),
         }}
-        onSubmit={(values) => updateProduct(product.id, values)}
+        onSubmit={updateProduct.bind(null, product.id)}
       />
     </div>
   );
