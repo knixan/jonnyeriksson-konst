@@ -4,11 +4,21 @@ import Link from "next/link";
 import { SITE_SETTINGS_QUERY, type SiteSettings } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/live";
 
+const fallbackContact = {
+  email: "jonnyeriksson@hotmail.com",
+  location: "Hallsberg, Sverige",
+  instagramUrl: "https://www.instagram.com/jonnyeriksson.art/",
+};
+
 export async function Footer() {
   const { data } = await sanityFetch({ query: SITE_SETTINGS_QUERY });
   const settings = data as SiteSettings | null;
   const contact = settings?.contact;
   const footerText = settings?.footer?.text;
+
+  const email = contact?.email || fallbackContact.email;
+  const location = contact?.location || fallbackContact.location;
+  const instagramUrl = contact?.instagramUrl || fallbackContact.instagramUrl;
 
   return (
     <footer id="kontakt" className="bg-footer text-footer-foreground">
@@ -27,41 +37,54 @@ export async function Footer() {
               href={`tel:${contact.phone}`}
               className="flex items-center gap-2 hover:text-accent"
             >
-              <Image src="/icon/icon-phone.png" alt="" width={16} height={16} />
-              {contact.phone}
-            </a>
-          ) : null}
-          {contact?.email ? (
-            <a
-              href={`mailto:${contact.email}`}
-              className="flex items-center gap-2 hover:text-accent"
-            >
-              <Image src="/icon/icon-email.png" alt="" width={16} height={16} />
-              {contact.email}
-            </a>
-          ) : null}
-          {contact?.location ? (
-            <span className="flex items-center gap-2">
               <Image
-                src="/icon/icon-map-nail.png"
+                src="/icon/icon-phone.png"
                 alt=""
                 width={16}
                 height={16}
+                unoptimized
               />
-              {contact.location}
-            </span>
+              {contact.phone}
+            </a>
           ) : null}
-          {contact?.instagramUrl ? (
-            <Link
-              href={contact.instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:text-accent"
-            >
-              <Image src="/icon/icon-insta.png" alt="" width={16} height={16} />
-              Instagram
-            </Link>
-          ) : null}
+          <a
+            href={`mailto:${email}`}
+            className="flex items-center gap-2 hover:text-accent"
+          >
+            <Image
+              src="/icon/icon-email.png"
+              alt=""
+              width={16}
+              height={16}
+              unoptimized
+            />
+            {email}
+          </a>
+          <span className="flex items-center gap-2">
+            <Image
+              src="/icon/icon-map-nail.png"
+              alt=""
+              width={16}
+              height={16}
+              unoptimized
+            />
+            {location}
+          </span>
+          <Link
+            href={instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 hover:text-accent"
+          >
+            <Image
+              src="/icon/icon-insta.png"
+              alt=""
+              width={16}
+              height={16}
+              unoptimized
+            />
+            Instagram
+          </Link>
           {contact?.facebookUrl ? (
             <Link
               href={contact.facebookUrl}
@@ -74,6 +97,7 @@ export async function Footer() {
                 alt=""
                 width={16}
                 height={16}
+                unoptimized
               />
               Facebook
             </Link>

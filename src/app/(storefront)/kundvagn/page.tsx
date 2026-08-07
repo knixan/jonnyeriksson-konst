@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { useCart } from "@/components/cart/cart-context";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { formatPrice } from "@/lib/format";
 
 export default function CartPage() {
@@ -15,13 +15,9 @@ export default function CartPage() {
     return (
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-6 py-24 text-center">
         <h1 className="text-4xl text-foreground">Din varukorg är tom</h1>
-        <Button
-          variant="cta"
-          nativeButton={false}
-          render={<Link href="/produkter" />}
-        >
+        <Link href="/produkter" className={buttonVariants({ variant: "cta" })}>
           Se konstverk
-        </Button>
+        </Link>
       </div>
     );
   }
@@ -105,15 +101,12 @@ export default function CartPage() {
         Frakt beräknas i kassan.
       </p>
 
-      <Button
-        variant="cta"
-        size="lg"
-        className="mt-6 w-full"
-        nativeButton={false}
-        render={<Link href="/kassa" />}
+      <Link
+        href="/kassa"
+        className={buttonVariants({ variant: "cta", size: "lg", className: "mt-6 w-full" })}
       >
         Till kassan
-      </Button>
+      </Link>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { unstable_rethrow } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
@@ -9,13 +10,14 @@ import { z } from "zod";
 
 import { createOrder } from "@/app/(storefront)/kassa/actions";
 import { useCart } from "@/components/cart/cart-context";
-import { Button } from "@/components/ui/button";
+import { FormField } from "@/components/shared/form-field";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { formatPrice } from "@/lib/format";
 
 const formSchema = z.object({
   name: z.string().min(1, "Ange namn"),
-  email: z.string().email("Ange en giltig e-postadress"),
+  email: z.email("Ange en giltig e-postadress"),
   phone: z.string().min(1, "Ange telefonnummer"),
   addressLine1: z.string().min(1, "Ange adress"),
   addressLine2: z.string().optional(),
@@ -47,13 +49,9 @@ export default function CheckoutPage() {
     return (
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 px-6 py-24 text-center">
         <h1 className="text-4xl text-foreground">Din varukorg är tom</h1>
-        <Button
-          variant="cta"
-          nativeButton={false}
-          render={<Link href="/produkter" />}
-        >
+        <Link href="/produkter" className={buttonVariants({ variant: "cta" })}>
           Se konstverk
-        </Button>
+        </Link>
       </div>
     );
   }
@@ -73,7 +71,7 @@ export default function CheckoutPage() {
         setSubmitting(false);
       }
     } catch (error) {
-      if ((error as Error)?.message?.includes("NEXT_REDIRECT")) throw error;
+      unstable_rethrow(error);
       toast.error("Något gick fel. Försök igen.");
       setSubmitting(false);
     }
@@ -85,31 +83,31 @@ export default function CheckoutPage() {
         <h1 className="text-4xl text-foreground">Kassa</h1>
 
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          <Field label="Namn" error={errors.name?.message}>
+          <FormField label="Namn" error={errors.name?.message}>
             <Input {...register("name")} />
-          </Field>
-          <Field label="E-post" error={errors.email?.message}>
+          </FormField>
+          <FormField label="E-post" error={errors.email?.message}>
             <Input type="email" {...register("email")} />
-          </Field>
-          <Field label="Telefon" error={errors.phone?.message}>
+          </FormField>
+          <FormField label="Telefon" error={errors.phone?.message}>
             <Input {...register("phone")} />
-          </Field>
-          <Field label="Postnummer" error={errors.postalCode?.message}>
+          </FormField>
+          <FormField label="Postnummer" error={errors.postalCode?.message}>
             <Input {...register("postalCode")} />
-          </Field>
-          <Field
+          </FormField>
+          <FormField
             label="Adress"
             error={errors.addressLine1?.message}
             className="sm:col-span-2"
           >
             <Input {...register("addressLine1")} />
-          </Field>
-          <Field label="Adress, rad 2 (valfritt)" className="sm:col-span-2">
+          </FormField>
+          <FormField label="Adress, rad 2 (valfritt)" className="sm:col-span-2">
             <Input {...register("addressLine2")} />
-          </Field>
-          <Field label="Ort" error={errors.city?.message}>
+          </FormField>
+          <FormField label="Ort" error={errors.city?.message}>
             <Input {...register("city")} />
-          </Field>
+          </FormField>
         </div>
 
         <fieldset className="mt-4 flex flex-col gap-2">
@@ -181,27 +179,5 @@ export default function CheckoutPage() {
         </p>
       </aside>
     </div>
-  );
-}
-
-function Field({
-  label,
-  error,
-  className,
-  children,
-}: {
-  label: string;
-  error?: string;
-  className?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <label
-      className={`flex flex-col gap-1 text-sm text-primary ${className ?? ""}`}
-    >
-      {label}
-      {children}
-      {error ? <span className="text-xs text-destructive">{error}</span> : null}
-    </label>
   );
 }

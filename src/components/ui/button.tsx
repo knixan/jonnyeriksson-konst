@@ -82,4 +82,4 @@ function BrushStroke() {
   );
 }
 
-export { Button, buttonVariants };
+export { Button, buttonVariants, BrushStroke };

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { DeleteProductButton } from "@/components/admin/delete-product-button";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -24,13 +24,12 @@ export default async function AdminProductsPage() {
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl text-foreground">Produkter</h1>
-        <Button
-          variant="cta"
-          nativeButton={false}
-          render={<Link href="/admin/produkter/ny" />}
+        <Link
+          href="/admin/produkter/ny"
+          className={buttonVariants({ variant: "cta" })}
         >
           Ny produkt
-        </Button>
+        </Link>
       </div>
 
       <Table>
@@ -73,14 +72,15 @@ export default async function AdminProductsPage() {
                   {fromPrice !== null ? formatPrice(fromPrice) : "—"}
                 </TableCell>
                 <TableCell className="flex justify-end gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    nativeButton={false}
-                    render={<Link href={`/admin/produkter/${product.id}`} />}
+                  <Link
+                    href={`/admin/produkter/${product.id}`}
+                    className={buttonVariants({
+                      variant: "outline",
+                      size: "sm",
+                    })}
                   >
                     Redigera
-                  </Button>
+                  </Link>
                   <DeleteProductButton
                     productId={product.id}
                     productName={product.name}

@@ -20,7 +20,7 @@ export function Header() {
           <Link href="/#om-konstnaren" className="hover:text-accent">
             Om konstnären
           </Link>
-          <Link href="/#kontakt" className="hover:text-accent">
+          <Link href="/kontakt" className="hover:text-accent">
             Kontakt
           </Link>
           <Link
@@ -28,7 +28,13 @@ export function Header() {
             aria-label="Sök"
             className="text-muted-foreground hover:text-accent"
           >
-            <Image src="/icon/icon-search.png" alt="" width={20} height={20} />
+            <Image
+              src="/icon/icon-search.png"
+              alt=""
+              width={20}
+              height={20}
+              unoptimized
+            />
           </Link>
           <CartButton />
         </nav>

@@ -16,7 +16,7 @@ export function FeatureStrip() {
             key={feature.label}
             className="flex items-center gap-3 sm:flex-col sm:text-center"
           >
-            <Image src={feature.icon} alt="" width={40} height={40} />
+            <Image src={feature.icon} alt="" width={40} height={40} unoptimized />
             <p className="text-sm text-secondary-foreground">{feature.label}</p>
           </div>
         ))}

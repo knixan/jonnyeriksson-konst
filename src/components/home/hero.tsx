@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
+import { BrushStroke, buttonVariants } from "@/components/ui/button";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
 import { SITE_SETTINGS_QUERY, type SiteSettings } from "@/sanity/lib/queries";
@@ -31,17 +31,20 @@ export async function Hero() {
           {hero?.subheading ||
             "Jag inspireras av platser, föremål och fantasi. När jag målar försöker jag fånga känslan och stämningen i mitt motiv, snarare än att återge det exakt som det ser ut."}
         </p>
-        <Button
-          render={<Link href="/produkter" />}
-          nativeButton={false}
-          variant="brush"
-          className="mt-8 h-auto w-fit gap-2 px-9 py-5 text-sm uppercase tracking-wide"
+        <Link
+          href="/produkter"
+          className={buttonVariants({
+            variant: "brush",
+            className:
+              "mt-8 h-auto w-fit gap-2 px-9 py-5 text-sm uppercase tracking-wide",
+          })}
         >
+          <BrushStroke />
           <span>Upptäck konstverken</span>
           <span aria-hidden className="text-xl font-light">
             →
           </span>
-        </Button>
+        </Link>
       </div>
     </section>
   );

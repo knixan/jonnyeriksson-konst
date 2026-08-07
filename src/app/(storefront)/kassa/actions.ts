@@ -8,7 +8,7 @@ import { stripe } from "@/lib/stripe";
 
 const checkoutSchema = z.object({
   name: z.string().min(1),
-  email: z.string().email(),
+  email: z.email(),
   phone: z.string().min(1),
   addressLine1: z.string().min(1),
   addressLine2: z.string().optional(),
@@ -131,7 +131,6 @@ export async function createOrder(
   if (data.paymentMethod === "STRIPE" && stripe) {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      payment_method_types: ["card"],
       customer_email: data.email,
       line_items: items.map((item) => ({
         quantity: item.quantity,
