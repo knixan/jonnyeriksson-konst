@@ -115,7 +115,7 @@ export async function Footer() {
         </div>
       </div>
       <div className="border-t border-footer-foreground/10 px-6 py-4 text-center text-xs text-footer-foreground/50">
-        © {new Date().getFullYear()} Jonny Eriksson
+        © {new Date().getFullYear()} Jonny Eriksson - Kod och Design av Josefine Eriksson
       </div>
     </footer>
   );
