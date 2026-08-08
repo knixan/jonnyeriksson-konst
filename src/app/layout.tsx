@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Libre_Baskerville } from "next/font/google";
+import { Cormorant_Garamond, Libre_Baskerville, WindSong } from "next/font/google";
 
 import { Toaster } from "@/components/ui/sonner";
 import { SanityLive } from "@/sanity/lib/live";
@@ -18,6 +18,12 @@ const body = Libre_Baskerville({
   weight: ["400", "700"],
 });
 
+const script = WindSong({
+  variable: "--font-script",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+});
+
 export const metadata: Metadata = {
   title: "Jonny Eriksson | Konst & Prints",
   description:
@@ -28,7 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="sv"
-      className={`${heading.variable} ${body.variable} h-full antialiased`}
+      className={`${heading.variable} ${body.variable} ${script.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         {children}

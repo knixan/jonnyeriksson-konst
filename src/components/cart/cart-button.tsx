@@ -17,10 +17,10 @@ export function CartButton() {
       <Image
         src="/icon/icon-bag.png"
         alt=""
-        width={22}
-        height={22}
+        width={40}
+        height={40}
         unoptimized
-        className="size-5.5"
+        className="size-8"
       />
       {itemCount > 0 ? (
         <span className="absolute -top-2 -right-2 flex size-4 items-center justify-center rounded-full bg-cta text-[10px] text-cta-foreground">

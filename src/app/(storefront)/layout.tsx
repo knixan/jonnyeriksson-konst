@@ -1,5 +1,5 @@
 import { Footer } from "@/components/layout/footer";
-import { Header } from "@/components/layout/header";
+import { Navbar } from "@/components/layout/navbar";
 
 export default function StorefrontLayout({
   children,
@@ -8,7 +8,7 @@ export default function StorefrontLayout({
 }) {
   return (
     <>
-      <Header />
+      <Navbar />
       <main className="flex flex-1 flex-col">{children}</main>
       <Footer />
     </>

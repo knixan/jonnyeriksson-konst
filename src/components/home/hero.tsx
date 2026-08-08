@@ -25,9 +25,9 @@ export async function Hero() {
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-linear-to-r from-background via-background/75 to-background/10" />
+        <div className="absolute inset-0 bg-linear-to-r from-background via-background/60 to-background/10" />
       </div>
-      <div className="relative mx-auto flex min-h-[75vh] max-w-6xl flex-col justify-center px-6 py-24">
+      <div className="relative mx-auto flex min-h-[85vh] max-w-6xl flex-col justify-center px-6 pt-32 pb-24 sm:pt-24">
         <p className="text-xs tracking-[0.2em] text-accent uppercase">
           {hero?.eyebrow || "Platser · Föremål · Fantasi"}
         </p>

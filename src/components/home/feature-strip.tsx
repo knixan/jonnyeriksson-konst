@@ -4,13 +4,13 @@ const features = [
   { icon: "/icon/icon-map-nail.png", label: "Inspirerad av platser" },
   { icon: "/icon/icon-cup.png", label: "Föremål med karaktär" },
   { icon: "/icon/icon-cloude.png", label: "Fantasi utan gränser" },
-  { icon: "/icon/icon-web.png", label: "Självlärd konstnär" },
+  { icon: "/icon/icon-brush.png", label: "Självlärd konstnär" },
 ];
 
 export function FeatureStrip() {
   return (
     <section className="bg-secondary">
-      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-6 py-10 sm:grid-cols-4">
+      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-4 py-6 sm:grid-cols-4">
         {features.map((feature) => (
           <div
             key={feature.label}
