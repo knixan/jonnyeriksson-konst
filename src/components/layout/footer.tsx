@@ -24,7 +24,17 @@ export async function Footer() {
     <footer id="kontakt" className="bg-footer text-footer-foreground">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-12 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <p className="text-xl font-medium">Jonny Eriksson</p>
+             <Link
+          href="/"
+          className="flex flex-col items-start leading-none text-primary-foreground"
+        >
+          <span className="font-script text-xl sm:text-5xl">
+            Jonny Eriksson
+          </span>
+          <span className="mt-1 self-center text-xs tracking-[0.35em] text-primary-foreground uppercase">
+            Konst
+          </span>
+        </Link>
           {footerText ? (
             <p className="mt-2 max-w-sm text-sm text-footer-foreground/70">
               {footerText}
@@ -58,7 +68,7 @@ export async function Footer() {
               width={16}
               height={16}
               unoptimized
-              className="size-4"
+              className="size-8"
             />
             {email}
           </a>
@@ -69,7 +79,7 @@ export async function Footer() {
               width={16}
               height={16}
               unoptimized
-              className="size-4"
+              className="size-8"
             />
             {location}
           </span>
@@ -85,7 +95,7 @@ export async function Footer() {
               width={16}
               height={16}
               unoptimized
-              className="size-4"
+              className="size-8"
             />
             Instagram
           </Link>
@@ -102,7 +112,7 @@ export async function Footer() {
                 width={16}
                 height={16}
                 unoptimized
-                className="size-4"
+                className="size-8"
               />
               Facebook
             </Link>

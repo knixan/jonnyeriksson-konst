@@ -7,12 +7,22 @@ const productInclude = {
   variants: { orderBy: { sortOrder: "asc" as const } },
 };
 
-export function getActiveProducts(categorySlug?: string, type?: ProductType) {
+export function getActiveProducts(
+  categorySlug?: string,
+  type?: ProductType,
+  search?: string,
+) {
   return prisma.product.findMany({
     where: {
       status: "ACTIVE",
       type,
       categories: categorySlug ? { some: { slug: categorySlug } } : undefined,
+      OR: search
+        ? [
+            { name: { contains: search, mode: "insensitive" } },
+            { description: { contains: search, mode: "insensitive" } },
+          ]
+        : undefined,
     },
     include: productInclude,
     orderBy: { createdAt: "desc" },
