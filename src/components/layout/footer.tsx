@@ -43,6 +43,7 @@ export async function Footer() {
                 width={16}
                 height={16}
                 unoptimized
+                className="size-4"
               />
               {contact.phone}
             </a>
@@ -57,6 +58,7 @@ export async function Footer() {
               width={16}
               height={16}
               unoptimized
+              className="size-4"
             />
             {email}
           </a>
@@ -67,6 +69,7 @@ export async function Footer() {
               width={16}
               height={16}
               unoptimized
+              className="size-4"
             />
             {location}
           </span>
@@ -82,6 +85,7 @@ export async function Footer() {
               width={16}
               height={16}
               unoptimized
+              className="size-4"
             />
             Instagram
           </Link>
@@ -98,6 +102,7 @@ export async function Footer() {
                 width={16}
                 height={16}
                 unoptimized
+                className="size-4"
               />
               Facebook
             </Link>

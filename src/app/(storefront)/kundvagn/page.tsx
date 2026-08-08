@@ -37,6 +37,7 @@ export default function CartPage() {
                   src={item.imageUrl}
                   alt={item.productName}
                   fill
+                  sizes="96px"
                   className="object-cover"
                 />
               ) : null}

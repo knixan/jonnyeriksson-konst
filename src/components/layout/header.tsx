@@ -34,6 +34,7 @@ export function Header() {
               width={20}
               height={20}
               unoptimized
+              className="size-5"
             />
           </Link>
           <CartButton />

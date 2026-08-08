@@ -45,6 +45,7 @@ export function ImageUploader({
                 src={image.url}
                 alt={image.alt ?? ""}
                 fill
+                sizes="96px"
                 className="object-cover"
               />
               <button

@@ -23,6 +23,7 @@ export async function AboutSection() {
               src={urlFor(about.image).width(900).height(1125).url()}
               alt={about.heading ?? fallbackHeading}
               fill
+              sizes="(min-width: 640px) 45vw, 100vw"
               className="object-cover"
             />
           </div>

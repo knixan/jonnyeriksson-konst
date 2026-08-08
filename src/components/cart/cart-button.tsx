@@ -14,7 +14,14 @@ export function CartButton() {
       aria-label="Kundvagn"
       className="relative text-muted-foreground hover:text-accent"
     >
-      <Image src="/icon/icon-bag.png" alt="" width={22} height={22} unoptimized />
+      <Image
+        src="/icon/icon-bag.png"
+        alt=""
+        width={22}
+        height={22}
+        unoptimized
+        className="size-5.5"
+      />
       {itemCount > 0 ? (
         <span className="absolute -top-2 -right-2 flex size-4 items-center justify-center rounded-full bg-cta text-[10px] text-cta-foreground">
           {itemCount}

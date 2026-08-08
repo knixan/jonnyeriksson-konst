@@ -17,7 +17,14 @@ export async function Hero() {
   return (
     <section className="relative overflow-hidden bg-background">
       <div className="absolute inset-0">
-        <Image src={imageUrl} alt="" fill priority className="object-cover" />
+        <Image
+          src={imageUrl}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
         <div className="absolute inset-0 bg-linear-to-r from-background via-background/75 to-background/10" />
       </div>
       <div className="relative mx-auto flex min-h-[75vh] max-w-6xl flex-col justify-center px-6 py-24">
