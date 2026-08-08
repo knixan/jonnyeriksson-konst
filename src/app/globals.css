@@ -61,13 +61,13 @@
   --card-foreground: oklch(24.5% 0.0048 67.6); /* #22201E */
   --popover: oklch(100% 0 0); /* #FFFFFF */
   --popover-foreground: oklch(24.5% 0.0048 67.6); /* #22201E */
-  --primary: oklch(33.108% 0.03978 53.336); /* #6F4D36 bränd umbra */
+  --primary: oklch(24.5% 0.0048 67.6); /* #6F4D36 bränd umbra */
   --primary-foreground: oklch(97.66% 0.0057 84.57); /* #F9F7F3 elfenben */
   --secondary: oklch(93.12% 0.0171 76.11); /* #EFE7DC ljus sand */
   --secondary-foreground: oklch(24.5% 0.0048 67.6); /* #22201E */
   --muted: oklch(93.12% 0.0171 76.11); /* #EFE7DC ljus sand */
   --muted-foreground: oklch(45.69% 0.0124 67.51); /* #5C5650 varm grå */
-  --accent: oklch(66.47% 0.0989 73.74); /* #B88A4A ockra */
+  --accent: oklch(58.266% 0.07837 73.963); /* #B88A4A ockra */
   --accent-foreground: oklch(24.5% 0.0048 67.6); /* #22201E */
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(85.53% 0.0192 75.3); /* #D7CEC2 ljus sten */
