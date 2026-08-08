@@ -6,6 +6,7 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { isOptimizableImageUrl } from "@/lib/images";
 import { UploadDropzone } from "@/lib/uploadthing";
 
 export type UploadedImage = { url: string; alt?: string };
@@ -45,6 +46,7 @@ export function ImageUploader({
                 src={image.url}
                 alt={image.alt ?? ""}
                 fill
+                unoptimized={!isOptimizableImageUrl(image.url)}
                 sizes="96px"
                 className="object-cover"
               />

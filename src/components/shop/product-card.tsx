@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { formatPrice } from "@/lib/format";
+import { isOptimizableImageUrl } from "@/lib/images";
 import type { getActiveProducts } from "@/lib/products";
 
 type Product = Awaited<ReturnType<typeof getActiveProducts>>[number];
@@ -22,6 +23,7 @@ export function ProductCard({ product }: { product: Product }) {
             src={image.url}
             alt={image.alt ?? product.name}
             fill
+            unoptimized={!isOptimizableImageUrl(image.url)}
             sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
             className="object-contain transition-transform group-hover:scale-105"
           />

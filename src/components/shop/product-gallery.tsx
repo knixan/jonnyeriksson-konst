@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import { isOptimizableImageUrl } from "@/lib/images";
+
 export function ProductGallery({
   images,
   alt,
@@ -27,6 +29,7 @@ export function ProductGallery({
             alt={image.alt ?? alt}
             fill
             priority={index === 0}
+            unoptimized={!isOptimizableImageUrl(image.url)}
             sizes="(min-width: 640px) 50vw, 100vw"
             className="object-cover"
           />

@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useCart } from "@/components/cart/cart-context";
 import { buttonVariants } from "@/components/ui/button";
 import { formatPrice } from "@/lib/format";
+import { isOptimizableImageUrl } from "@/lib/images";
 
 export default function CartPage() {
   const { items, setQuantity, removeItem, subtotalOre } = useCart();
@@ -37,6 +38,7 @@ export default function CartPage() {
                   src={item.imageUrl}
                   alt={item.productName}
                   fill
+                  unoptimized={!isOptimizableImageUrl(item.imageUrl)}
                   sizes="96px"
                   className="object-cover"
                 />
